@@ -1,0 +1,407 @@
+
+DBMS: files
+====
+not support to create multiple users
+
+no relations
+
+able to store less amount of data compare with RDBMS.
+
+not support normalization
+
+no security for data.
+
+no support distribution
+
+not required SQL or PL/SQL languages
+
+for example Mongo DB, Cassandra and MS Access..etc
+
+RDBMS: tables
+=====
+
+support to create multiple users
+
+there is relations bt tables
+
+able to store huge amount of data.
+
+support normalization
+
+we have security for data
+
+support distribution.
+
+required SQL or PL/SQL languages
+
+
+for example MySQL, Postgress, Oracle, DB2, MS SQLServer..etc
+
+====================================================================
+
+SQL or PL/SQL: 
+
+SQL: structured query langauge
+
+- we can to write script/instructions/queries to interact with RDBMS database server.
+
+SQL again categorized into 
+
+1. DQL(Data Query Language): select
+
+for example,
+
+mysql> select * from patient;
++------------+-----------+--------------+----------------+
+| patient_id | address   | patient_name | problem        |
++------------+-----------+--------------+----------------+
+|        110 | Pune      | Arun         | Kidney Problem |
+|        213 | Mumbai    | Raj          | Heart Problem  |
+|        232 | Hyderabad | Harish       | Liver Problem  |
++------------+-----------+--------------+----------------+
+
+2. DDL(Data Defination Language): create, drop, alter, truncate, modify and rename
+
+for example,
+
+mysql> create table xyz(id int not null primary key, text varchar(100) not null);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc xyz;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | NO   | PRI | NULL    |       |
+| text  | varchar(100) | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------
+
+mysql> create table xyz(id int not null primary key, text varchar(100) not null);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> insert into xyz values(500, 'abc');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into xyz values(501, 'sdf');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from xyz;
++-----+------+
+| id  | text |
++-----+------+
+| 500 | abc  |
+| 501 | sdf  |
++-----+------+
+2 rows in set (0.00 sec)
+
+mysql> drop table xyz;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from xyz;
+ERROR 1146 (42S02): Table 'patientdb.xyz' doesn't exist
+mysql> drop table xyz;
+
+----------------------------------------------------------------------------------------
+
+mysql> alter table xyz rename to abc;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc xyz;
+ERROR 1146 (42S02): Table 'patientdb.xyz' doesn't exist
+mysql> desc abc;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | NO   | PRI | NULL    |       |
+| text  | varchar(100) | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------------------
+
+mysql> alter table abc add age int(10) not null;
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc abc;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| id    | int          | NO   | PRI | NULL    |       |
+| text  | varchar(100) | NO   |     | NULL    |       |
+| age   | int          | NO   |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table abc add (postal int(20) not null, address varchar(100) not null);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc abc;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | NO   | PRI | NULL    |       |
+| text    | varchar(100) | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| postal  | int          | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+---------------------------------------------------------------------------------------------
+
+mysql> alter table abc rename COLUMN text to name;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc abc;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | NO   | PRI | NULL    |       |
+| name    | varchar(100) | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| postal  | int          | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+-----------------------------------------------------------------------------------------------------
+
+mysql> alter table abc drop CoLUMN postal;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc abc;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | NO   | PRI | NULL    |       |
+| name    | varchar(100) | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+-------------------------------------------------------------------------------------
+
+mysql> alter table abc modify COLUMN text varchar(400);
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc abc;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | NO   | PRI | NULL    |       |
+| name    | varchar(100) | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
+| text    | varchar(400) | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table abc modify COLUMN text varchar(400) not null;
+Query OK, 0 rows affected (0.07 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc abc;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | NO   | PRI | NULL    |       |
+| name    | varchar(100) | NO   |     | NULL    |       |
+| age     | int          | NO   |     | NULL    |       |
+| address | varchar(100) | NO   |     | NULL    |       |
+| text    | varchar(400) | NO   |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+----------------------------------------------------------------------------
+
+mysql> select * from abc;
++-----+------+-----+---------+------------+
+| id  | name | age | address | text       |
++-----+------+-----+---------+------------+
+| 500 | abc  |  27 | pune    | hello guys |
+| 501 | sdf  |  77 | patna   | hi guys    |
++-----+------+-----+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> truncate table abc;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from abc;
+Empty set (0.00 sec)
+
+
+==========================================================================================================
+
+3. DML(Data Manipulation Language): insert into, delete and update
+
+mysql> insert into patient values(112, 'USA', 'XYZ', 'abc');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from patient;
++------------+-----------+--------------+----------------+
+| patient_id | address   | patient_name | problem        |
++------------+-----------+--------------+----------------+
+|        110 | Pune      | Arun         | Kidney Problem |
+|        112 | USA       | XYZ          | abc            |
+|        213 | Mumbai    | Raj          | Heart Problem  |
+|        232 | Hyderabad | Harish       | Liver Problem  |
++------------+-----------+--------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> update patient set patient_name = 'Satish', problem = 'Right leg legament Problem' where patient_id = 112;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from patient;
++------------+-----------+--------------+----------------------------+
+| patient_id | address   | patient_name | problem                    |
++------------+-----------+--------------+----------------------------+
+|        110 | Pune      | Arun         | Kidney Problem             |
+|        112 | USA       | Satish       | Right leg legament Problem |
+|        213 | Mumbai    | Raj          | Heart Problem              |
+|        232 | Hyderabad | Harish       | Liver Problem              |
++------------+-----------+--------------+----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into patient values(500, 'UK', 'XYZ', 'abc');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from patient;
++------------+-----------+--------------+----------------------------+
+| patient_id | address   | patient_name | problem                    |
++------------+-----------+--------------+----------------------------+
+|        110 | Pune      | Arun         | Kidney Problem             |
+|        112 | USA       | Satish       | Right leg legament Problem |
+|        213 | Mumbai    | Raj          | Heart Problem              |
+|        232 | Hyderabad | Harish       | Liver Problem              |
+|        500 | UK        | XYZ          | abc                        |
++------------+-----------+--------------+----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> delete from patient where patient_id = 500;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from patient;
++------------+-----------+--------------+----------------------------+
+| patient_id | address   | patient_name | problem                    |
++------------+-----------+--------------+----------------------------+
+|        110 | Pune      | Arun         | Kidney Problem             |
+|        112 | USA       | Satish       | Right leg legament Problem |
+|        213 | Mumbai    | Raj          | Heart Problem              |
+|        232 | Hyderabad | Harish       | Liver Problem              |
++------------+-----------+--------------+----------------------------+
+4 rows in set (0.00 sec)
+
+mysql> select patient_id, problem from patient;
++------------+----------------------------+
+| patient_id | problem                    |
++------------+----------------------------+
+|        110 | Kidney Problem             |
+|        112 | Right leg legament Problem |
+|        213 | Heart Problem              |
+|        232 | Liver Problem              |
++------------+----------------------------+
+
+==========================================================================================================
+
+* 4. TCL(Transaction Control Language): commit, rollback and savepoint
+
+we cover at the time of JDBC Transaction Managament.
+
+==========================================================================================================
+
+5. DCL(Data Control Language): Grant and Revoke
+
+mysql> select current_user();
++----------------+
+| current_user() |
++----------------+
+| root@localhost |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> create user 'radha'@'localhost' identified by '12345';
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select user, host from mysql.user;
++---------------------+-----------+
+| user                | host      |
++---------------------+-----------+
+| abc@localhost       | %         |
+| radhasree@localhost | %         |
+| mysql.infoschema    | localhost |
+| mysql.session       | localhost |
+| mysql.sys           | localhost |
+| radha               | localhost |
+| root                | localhost |
++---------------------+-----------+
+7 rows in set (0.00 sec)
+
+
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'radha'@'localhost' with grant option;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> system mysql -u radha -p;
+Enter password: *****
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 179
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select current_user();
++-----------------+
+| current_user()  |
++-----------------+
+| radha@localhost |
++-----------------+
+1 row in set (0.00 sec)
+
+**check privileges like show, select, ...etc.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db120              |
+| employeedb         |
+| information_schema |
+| mysql              |
+| performance_schema |
+| pms                |
+| relationship13     |
+| relationships      |
+| relationships12    |
+| sys                |
+| userdb             |
++--------------------+
+11 rows in set (0.01 sec)
+
+mysql> show grants for 'radha'@'localhost';
++-------------------------------------------+
+| Grants for radha@localhost                |
++-------------------------------------------+
+| GRANT USAGE ON *.* TO `radha`@`localhost` |
++-------------------------------------------+
+1 row in set (0.00 sec)
+
+
+
+
+
